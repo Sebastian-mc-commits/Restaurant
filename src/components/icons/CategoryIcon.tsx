@@ -3,7 +3,7 @@ import IconParent from './IconParent'
 import Category from "../../assets/category/category-dark.svg"
 import CategoryFill from "../../assets/category/category-fill.svg"
 import CategoryLight from "../../assets/category/category-light.svg"
-import { IconProps } from '../../lib/types'
+import { IconProps } from '../../lib/types.d'
 import { FC } from 'react'
 
 type CategoryIconProps = FC<IconProps> & {

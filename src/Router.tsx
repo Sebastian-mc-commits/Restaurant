@@ -22,7 +22,10 @@ const router = createBrowserRouter([
         path: "/category",
         element: (
             <Wrapper>
-                <Category />
+                <Category
+                    opt="options"
+                    style="non"
+                />
             </Wrapper>
         )
     },

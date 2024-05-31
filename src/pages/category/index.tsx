@@ -1,82 +1,31 @@
 
-import { Button, Card, Col, Divider, Flex, Form, Input, Modal, Row } from 'antd'
-import { ICategory } from '../../lib/models/IRestaurant.model'
+import { Button, Col, Divider, Row } from 'antd'
+import { ICategory } from '../../lib/models/IRestaurant.model';
 import { categories } from '../../lib/data'
-import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import useModalCategory from '../../components/CategoryItem/useModalCategory';
+import CategoryChild from './CategoryChild';
+import { ComponentOptions } from '../../lib/models/types.models';
+import { Gutter } from 'antd/es/grid/row';
+import { ColSize } from 'antd/es/grid';
 
-type CategoryChildProps = ICategory & {
-  onDelete: (id: string | number) => boolean,
-  onUpdate: (props: ICategory) => boolean
-}
+type CategoryProps = {
+  initial?: ICategory[];
+  opt: ComponentOptions;
+  style: "non";
+} | {
+  initial?: ICategory[];
+  opt: ComponentOptions;
+  style: "modify";
+  gutter: Gutter;
+  colSize: ColSize
+};
 
-type ModalCategoryProps = {
-  onFinish: () => null;
-  categoryTitle: string;
-}
+export default function Category({ initial, opt, style, ...rowProps }: Readonly<CategoryProps>) {
 
-function modalCategory(): [
-  FC<ModalCategoryProps>,
-  Dispatch<SetStateAction<boolean>>
-] {
-
-  const [form] = Form.useForm()
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  const Component = ({ categoryTitle, onFinish }: ModalCategoryProps) => (
-    <Modal
-      cancelText="Cancelar"
-      open={isModalOpen}
-      onCancel={() => setIsModalOpen(false)}
-      centered={true}
-      closable={false}
-    >
-
-      <Form
-        form={form}
-        name='category-modal'
-        onFinish={onFinish}
-      >
-
-        <Form.Item name="name" label={categoryTitle} rules={[{
-          required: true,
-          message: "Escribe una Categoria"
-        }]}>
-
-          <Input />
-        </Form.Item>
-      </Form>
-    </Modal>
-  )
-
-  return [Component, setIsModalOpen]
-}
-
-function CategoryChild({ name, id, onDelete, onUpdate }: CategoryChildProps) {
-
-  return (
-    <Card hoverable>
-
-      <Flex justify='space-between' align='center'>
-        <div>Square</div>
-
-        <Flex vertical justify='space-between' align='center'>
-          <strong>{name}</strong>
-
-          <Flex gap={10} wrap>
-            <Button onClick={() => onDelete(id)} danger>Eliminar</Button>
-            <Button onClick={() => onUpdate({ id, name })} type='primary'>Actualizar</Button>
-          </Flex>
-        </Flex>
-      </Flex>
-    </Card>
-  )
-}
-
-export default function Category() {
-
-  const [categoryData, setCategoryData] = useState(categories)
-  const [ModalCategory, setIsModalOpen] = modalCategory
-  const [form] = Form.useForm()
+  const [categoryData, setCategoryData] = useState(initial || categories)
+  const [ModalCategory, setIsModalOpen] = useModalCategory()
+  const modifyRowProps = style === "modify"
 
   const onDelete = (id: string | number) => {
     setCategoryData(prev => prev.filter(p => p.id !== id))
@@ -85,7 +34,6 @@ export default function Category() {
   }
 
   const onUpdate = (props: ICategory) => {
-    setIsModalOpen(true)
     setCategoryData(prev =>
       prev.map(ct => {
         if (ct.id === props.id) {
@@ -96,7 +44,6 @@ export default function Category() {
       })
     )
 
-    return true
   }
 
   const onCreate = (values: Omit<ICategory, "id">) => {
@@ -109,58 +56,66 @@ export default function Category() {
       }
     ])
 
-    setIsModalOpen(false)
   }
+
+  const childProps = useCallback((props: ICategory) => {
+
+    if (opt === "non-options") {
+      return {
+        ...props,
+        categoryType: 'non-options' as const,
+      }
+    }
+
+    return {
+      ...props,
+      categoryType: "options" as const,
+      onDelete,
+      onUpdate
+    }
+  }, [opt, onDelete, onUpdate])
+
+  const categoryChildStyles: ColSize = modifyRowProps ?
+    (rowProps as { colSize: ColSize }).colSize
+    :
+    {
+      span: 6
+    }
 
   return (
     <div>
-
       <Divider orientation='right'>
-        <Button onClick={() => setIsModalOpen(true)} type='primary'>Crear Categoria</Button>
-      </Divider>
-      <ModalCategory />
-      <Modal
-        cancelText="Cancelar"
-        open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
-        centered={true}
-        closable={false}
-      >
-
-        <Form
-          form={form}
-          name='create-category'
-          onFinish={onCreate}
-        >
-
-          <Form.Item name="name" label='Categoria' rules={[{
-            required: true,
-            message: "Escribe una Categoria"
-          }]}>
-
-            <Input />
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      <Row gutter={{
-        xs: 8,
-        sm: 16,
-        md: 24,
-        lg: 32
-      }}>
+        {
+          opt === "options" && <Button onClick={() => setIsModalOpen(true)} type='primary'>Crear Categoria</Button>
+        }
+      </Divider> 
+      <ModalCategory
+        categoryTitle='Crea una Categoria'
+        onFinish={onCreate}
+      />
+      <Row gutter={
+        modifyRowProps ?
+          (rowProps as { gutter: Gutter }).gutter
+          :
+          {
+            xs: 8,
+            sm: 16,
+            md: 24,
+            lg: 32
+          }
+      }>
 
         {
           categoryData.map(ct => (
-            <Col span={6}
+            <Col
+              {...categoryChildStyles}
               style={{
                 marginBottom: 15
               }}
+              key={ct.id}
             >
               <CategoryChild
-                {...ct}
-                onDelete={onDelete}
-                onUpdate={onUpdate}
+                {...childProps(ct)}
               />
             </Col>
           ))

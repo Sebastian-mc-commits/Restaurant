@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { IconProps } from '../../lib/types'
+import { IconProps } from '../../lib/types.d'
 import IconParent from './IconParent'
 import DishDinner from "../../assets/dishes/dish-dinner-colorful.svg"
 import DishPlate from "../../assets/dishes/dish-plate-colorful.svg"

@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { IconProps } from '../../lib/types'
+import { IconProps } from '../../lib/types.d'
 import IconParent from './IconParent'
 import MenuFoodLight from "../../assets/menu-food/menu-food-light.svg"
 import MenuFoodLightFill from "../../assets/menu-food/menu-food-light-fill.svg"

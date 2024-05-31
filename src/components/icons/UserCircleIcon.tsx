@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { IconProps } from '../../lib/types'
+import { IconProps } from '../../lib/types.d'
 import IconParent from './IconParent'
 import UserCircleLight from "../../assets/user/user-circle-light.svg"
 import UserSquareLight from "../../assets/user/user-square-light.svg"

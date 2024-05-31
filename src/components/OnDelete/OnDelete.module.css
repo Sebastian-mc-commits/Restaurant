@@ -1,0 +1,27 @@
+.closeButton {
+    color: #800e13;
+    font-weight: bolder;
+    font-size: 5px;
+    background-color: rgba(173, 40, 49, 0.5);
+    border-radius: 7px;
+    padding: 0.5rem;
+    margin: 5;
+    cursor: pointer;
+    position: absolute;
+    top: -20%;
+    outline: none;
+    border: none;
+    left: 80%;
+    transition: transform 0.3s;
+}
+
+.closeButton:hover {
+    transform: scale(1.5);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+}

@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { IconProps } from '../../lib/types'
+import { IconProps } from '../../lib/types.d'
 import IconParent from './IconParent'
 import AdminLight from "../../assets/administration/admin-light.svg"
 import BusinessLightFill from "../../assets/administration/business-light-fill.svg"

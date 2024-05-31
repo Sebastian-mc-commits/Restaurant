@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { IconProps } from '../../lib/types'
+import { IconProps } from '../../lib/types.d'
 import IconParent from './IconParent'
 import ConfigurationGear from "../../assets/configuration/configuration-gear-options.svg"
 import ConfigurationGearFill from "../../assets/configuration/configuration-gear-fill.svg"

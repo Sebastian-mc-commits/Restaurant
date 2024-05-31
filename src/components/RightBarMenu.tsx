@@ -2,7 +2,7 @@ import { Breadcrumb, Layout, Menu, MenuProps, theme } from 'antd'
 import { CategoryIcon, ConfigurationGearIcon, DishIconColorful, FoodIconLight, MenuFoodIconLight, RoleIconLight, SystemIconColorful, UserCircleIcon } from './icons'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import { Routes } from '../lib/types'
+import { Routes } from '../lib/types.d'
 
 type MenuItem = Required<MenuProps>["items"][number]
 type RightBarMenuProps = {

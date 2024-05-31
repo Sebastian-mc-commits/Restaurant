@@ -1,6 +1,6 @@
 
 import { FC } from 'react'
-import { IconProps } from '../../lib/types'
+import { IconProps } from '../../lib/types.d'
 import IconParent from './IconParent'
 import HamburgerMenu from "../../assets/menu/hamburger-menu.svg"
 import HamburgerMenuCompressed from "../../assets/menu/compress-hamburger.menu.svg"
