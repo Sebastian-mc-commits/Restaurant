@@ -1,0 +1,29 @@
+Historia de Usuario - Web
+
+El sistema inicialmente debe pedir los datos de acceso de administrador: correo y contraseña. En caso de tener errores, el sistema lanzará el error "Correo o contraseña incorrectos".
+Una vez ingresado al sistema, el usuario podrá ver los siguientes módulos:
+Categorías: Este módulo tiene la funcionalidad final de ser filtrado en los platos, además de funcionar como etiqueta. Este módulo cuenta con CRUD.
+Platillos: Este módulo cuenta con los siguientes datos:
+Nombre
+Categorías
+Precio
+Descuento (Opcional)
+Descripción (Opcional)
+Imágenes (Mínimo 1 imagen)
+Cantidad disponible. Este módulo cuenta con CRUD.
+Crear roles en caso de ser administrador total: En este módulo pueden ser creados los usuarios y/o roles y generar acceso a diferentes módulos. Este módulo cuenta con CRUD. Para el acceso a este módulo, es necesario ingresar la contraseña de administrador.
+Pedidos: Platillos en tiempo real solicitados por mesas (En mesa 1 pueden pedir x cantidad de platillos [id del mismo]). El usuario ingresado puede también rechazar pedidos y crear nuevos a mesas.
+Configuración: CRUD del usuario ingresado en el sistema.
+Finalizados: Pedidos finalizados y/o listos para pagar, luego puede aceptar el pago del pedido el cual finalizará y generará un recibo. Este módulo cuenta con CRUD.
+Mesas: Este módulo cuenta con los siguientes campos:
+ID de la mesa
+Ubicación (Opcional)
+Cabe destacar que cada uno de los módulos es supervisado y cedido por un administrador, el cual crea cuentas y asigna los módulos que considere, así mismo puede crear roles para facilitar. Finalmente, el usuario no puede tener acceso a todos los módulos, solo una cantidad considerable.
+El sistema contará con un módulo para crear administradores totales, pero esta será administrada y controlada por el desarrollador. La creación de usuario contará con los siguientes datos:
+Nombre completo
+Correo
+Contraseña (Mínimo: 8 caracteres, 1 letra mayúscula, 1 letra minúscula, 1 carácter especial…)
+Repetir contraseña
+Teléfono de contacto
+Nombre del restaurante / lugar
+Logo de este
