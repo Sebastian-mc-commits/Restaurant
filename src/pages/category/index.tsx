@@ -8,6 +8,8 @@ import CategoryChild from './CategoryChild';
 import { ComponentOptions } from '../../lib/models/types.models';
 import { Gutter } from 'antd/es/grid/row';
 import { ColSize } from 'antd/es/grid';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { getCategories } from '../../store/features/categorySlice';
 
 type CategoryProps = {
   initial?: ICategory[];
@@ -25,6 +27,9 @@ export default function Category({ initial, opt, style, ...rowProps }: Readonly<
 
   const [categoryData, setCategoryData] = useState(initial || categories)
   const [ModalCategory, setIsModalOpen] = useModalCategory()
+  const sliceCategories = useAppSelector(state => state.categorySlice)
+  const dispatch = useAppDispatch()
+
   const modifyRowProps = style === "modify"
 
   const onDelete = (id: string | number) => {
@@ -82,13 +87,20 @@ export default function Category({ initial, opt, style, ...rowProps }: Readonly<
       span: 6
     }
 
+  const handleCategories = () => {
+    dispatch(getCategories())
+  }
+
   return (
     <div>
       <Divider orientation='right'>
         {
           opt === "options" && <Button onClick={() => setIsModalOpen(true)} type='primary'>Crear Categoria</Button>
         }
-      </Divider> 
+      </Divider>
+      <button
+        onClick={handleCategories}
+      >Get categories</button>
       <ModalCategory
         categoryTitle='Crea una Categoria'
         onFinish={onCreate}
@@ -106,7 +118,7 @@ export default function Category({ initial, opt, style, ...rowProps }: Readonly<
       }>
 
         {
-          categoryData.map(ct => (
+          sliceCategories.map(ct => (
             <Col
               {...categoryChildStyles}
               style={{
