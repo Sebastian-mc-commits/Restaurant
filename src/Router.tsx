@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import FoodOrders from "./pages/foodOrders";
 import Category from "./pages/category";
-import Dishes from "./pages/dishes";
+import Dishes from "./pages/menuItem";
 import DishOfTheDay from "./pages/dishOfTheDay";
 import User from "./pages/configuration/user";
 import System from "./pages/configuration/system";
@@ -22,10 +22,7 @@ const router = createBrowserRouter([
         path: "/category",
         element: (
             <Wrapper>
-                <Category
-                    opt="options"
-                    style="non"
-                />
+                <Category />
             </Wrapper>
         )
     },

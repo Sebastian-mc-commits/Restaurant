@@ -1,9 +1,9 @@
-import { ICategory, IDishOrder } from "./models/IRestaurant.model";
+import { IExtendedCategory, IExtendedCategory_IExtendedMenuItem, IExtendedMenuItem } from "./models/IRestaurant.model";
 import ChineseRice1 from "../assets/images/arroz_chino.jfif"
 import ChineseRice2 from "../assets/images/arroz_chino2.jpg"
 import ChineseRice3 from "../assets/images/arroz_chino3.jfif"
 
-export const categories: ICategory[] = [
+export const categories: IExtendedCategory[] = [
     {
         name: "Mariscos",
         description: "Mariscos Rico/s y delicioso/s",
@@ -31,11 +31,12 @@ export const categories: ICategory[] = [
     },
 ]
 
-export const dishOrders: IDishOrder[] = [
+export const dishOrders: IExtendedMenuItem[] = [
     {
         name: "Arroz chino",
         categories: [categories[0], categories[2]],
         price: 20.000,
+        menuOfTheDay: false,
         description: "Delicioso arroz chino",
         discount: 5,
         availableQuantity: 10,
@@ -50,6 +51,7 @@ export const dishOrders: IDishOrder[] = [
         name: "Sushi",
         categories: [categories[0]],
         price: 25.000,
+        menuOfTheDay: false,
         description: "Fresh and delicious sushi",
         discount: 0,
         availableQuantity: 15,
@@ -64,6 +66,7 @@ export const dishOrders: IDishOrder[] = [
         name: "Taco",
         categories: [categories[1]],
         price: 10.000,
+        menuOfTheDay: false,
         description: "Tasty taco",
         discount: 0,
         availableQuantity: 20,
@@ -78,6 +81,7 @@ export const dishOrders: IDishOrder[] = [
         name: "Paella",
         categories: [categories[2]],
         price: 30.000,
+        menuOfTheDay: false,
         description: "Traditional Spanish paella",
         discount: 10,
         availableQuantity: 8,
@@ -92,6 +96,7 @@ export const dishOrders: IDishOrder[] = [
         name: "Vegan Burger",
         categories: [categories[3]],
         price: 15.000,
+        menuOfTheDay: false,
         description: "Healthy and delicious vegan burger",
         discount: 0,
         availableQuantity: 12,
@@ -106,6 +111,7 @@ export const dishOrders: IDishOrder[] = [
         name: "Mojito",
         categories: [categories[4]],
         price: 8.000,
+        menuOfTheDay: false,
         description: "Refreshing mojito cocktail",
         discount: 0,
         availableQuantity: 25,
@@ -120,6 +126,7 @@ export const dishOrders: IDishOrder[] = [
         name: "Seafood Paella",
         categories: [categories[0], categories[2]],
         price: 35.000,
+        menuOfTheDay: false,
         description: "Exquisite seafood paella",
         discount: 0,
         availableQuantity: 10,
@@ -131,3 +138,8 @@ export const dishOrders: IDishOrder[] = [
         id: 7,
     },
 ];
+
+export const extendedCategoriesWithMenuItems: IExtendedCategory_IExtendedMenuItem[] = categories.map(category => ({
+    ...category,
+    menuItems: dishOrders.filter(dish => dish.categories.some(cat => cat.id === category.id)),
+}));

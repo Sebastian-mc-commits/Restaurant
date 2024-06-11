@@ -13,16 +13,16 @@ const labelCategoryStyle: CSSProperties = {
 }
 
 type LabelSpanProps = {
-    child: React.ReactNode;
+    children: React.ReactNode;
     text: string;
 } & { [K in keyof PopoverProps]?: PopoverProps[K] };
 
-export default function LabelSpan({ child, text, ...popoverElements }: LabelSpanProps) {
+export default function LabelSpan({ children, text, ...popoverElements }: LabelSpanProps) {
     return (
         <Popover
             {...popoverElements}
             placement='topLeft'
-            content={child}
+            content={children}
         >
             <span
                 style={labelCategoryStyle}

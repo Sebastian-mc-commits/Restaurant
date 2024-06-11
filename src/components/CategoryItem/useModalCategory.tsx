@@ -3,7 +3,7 @@ import { Dispatch, FC, SetStateAction, useState } from "react";
 import { ICategory } from "../../lib/models/IRestaurant.model";
 
 type ModalCategoryProps = {
-    onFinish: (props: Omit<ICategory, "id">) => void;
+    onFinish: (props: ICategory) => void;
     categoryTitle: string;
   }
 

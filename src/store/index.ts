@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { categorySlice } from "./features";
+import { categorySlice, menuItemSlice } from "./services";
 
 export const store = configureStore({
     reducer: {
-        categorySlice
+        categorySlice,
+        menuItemSlice
     }
 })
 

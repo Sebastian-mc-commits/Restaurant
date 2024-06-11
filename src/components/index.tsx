@@ -1,3 +1,6 @@
 export { default as LabelSpan } from "./LabelSpan"
 export { default as OnDelete } from "./OnDelete"
 export { default as AddFile } from "./AddFile"
+export { default as CategoryItem } from "./CategoryItem"
+export { default as RowContainer } from "./RowContainer"
+export { default as MenuItemComponent } from "./MenuItemComponent"

@@ -21,8 +21,16 @@
   -webkit-text-size-adjust: 100%;
 }
 
-p, strong {
+p,
+strong {
   word-wrap: break-word;
   word-break: break-word;
   white-space: normal;
+}
+
+img {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
 }
